@@ -1,5 +1,7 @@
 """Carga data/processed/telco_clean.csv a una base DuckDB."""
 
+from pathlib import Path
+
 import duckdb
 import pandas as pd
 
@@ -13,6 +15,7 @@ def main() -> None:
     df = pd.read_csv(CLEAN_PATH)
     csv_churn_rate = df["Churn"].mean()
 
+    Path(DB_PATH).parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(DB_PATH)
     con.execute("CREATE OR REPLACE TABLE customers AS SELECT * FROM df")
 

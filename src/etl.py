@@ -1,5 +1,7 @@
 """ETL: limpieza del dataset crudo de Telco Customer Churn."""
 
+from pathlib import Path
+
 import pandas as pd
 
 RAW_PATH = "data/raw/Telco-Customer-Churn.csv"
@@ -28,6 +30,7 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 def main() -> None:
     df = load_raw(RAW_PATH)
     df_clean = clean(df)
+    Path(PROCESSED_PATH).parent.mkdir(parents=True, exist_ok=True)
     df_clean.to_csv(PROCESSED_PATH, index=False)
 
     n_rows = len(df_clean)
