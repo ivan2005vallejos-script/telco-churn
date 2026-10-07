@@ -1,0 +1,46 @@
+feature,coefficient
+categorical__InternetService_Fiber optic,0.7123965679068652
+categorical__Contract_Month-to-month,0.6559640992775175
+numeric__TotalCharges,0.4872950566084557
+categorical__StreamingMovies_Yes,0.27679413459639335
+categorical__StreamingTV_Yes,0.2641276950247368
+categorical__PaymentMethod_Electronic check,0.2389490326669844
+categorical__OnlineSecurity_No,0.1980478076451657
+categorical__TechSupport_No,0.1640116581118752
+passthrough__SeniorCitizen,0.15102851840634052
+categorical__MultipleLines_Yes,0.13405442844407423
+categorical__DeviceProtection_Yes,0.07440773941567018
+categorical__PaperlessBilling_Yes,0.07049978437309984
+categorical__OnlineBackup_No,0.0671011019390526
+categorical__OnlineBackup_Yes,0.017520532600215157
+categorical__Dependents_No,0.017377549350179645
+categorical__DeviceProtection_No,0.010213895123597716
+categorical__Contract_One year,-0.07461471002719844
+categorical__TechSupport_Yes,-0.07939002357261513
+categorical__gender_Male,-0.0815141772658639
+categorical__PhoneService_Yes,-0.08156588692081054
+categorical__Partner_Yes,-0.08817175602351916
+categorical__Partner_No,-0.1064080656308176
+categorical__PaymentMethod_Mailed check,-0.10988033327972872
+categorical__MultipleLines_No phone service,-0.1130139347335111
+categorical__PhoneService_No,-0.1130139347335111
+categorical__gender_Female,-0.11306564438845997
+categorical__OnlineSecurity_Yes,-0.11342617310589899
+categorical__PaymentMethod_Credit card (automatic),-0.16169864105661544
+categorical__PaymentMethod_Bank transfer (automatic),-0.16194987998496405
+categorical__StreamingTV_No,-0.17950606048547463
+categorical__StreamingMovies_No,-0.19217250005711345
+categorical__Dependents_Yes,-0.2119573710045149
+categorical__MultipleLines_No,-0.21562031536488144
+categorical__PaperlessBilling_No,-0.26507960602742753
+categorical__TechSupport_No internet service,-0.2792014561935858
+categorical__OnlineSecurity_No internet service,-0.2792014561935858
+categorical__InternetService_No,-0.2792014561935858
+categorical__StreamingMovies_No internet service,-0.2792014561935858
+categorical__StreamingTV_No internet service,-0.2792014561935858
+categorical__OnlineBackup_No internet service,-0.2792014561935858
+categorical__DeviceProtection_No internet service,-0.2792014561935858
+categorical__InternetService_DSL,-0.6277749333675938
+numeric__MonthlyCharges,-0.6877041568175223
+categorical__Contract_Two year,-0.7759292109046304
+numeric__tenure,-1.1526030349469516
