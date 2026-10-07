@@ -8,7 +8,7 @@ Sobre el conjunto de test (clientes que el modelo no vio al entrenar):
 
 - **Recall en la clase churn: 78.34%** — de cada 10 clientes que efectivamente se dan de baja, el modelo detecta a casi 8.
 - **ROC-AUC: 0.8416**
-- **Precision en la clase churn: 50.43%** (a este recall, la mitad de los clientes marcados como riesgo no se termina yendo)
+- **Precision en la clase churn: 50.43%** — de cada 10 clientes marcados como riesgo, alrededor de 5 se iban de verdad
 - **9 tests pasando** (`pytest`)
 
 Fuente: `reports/metrics.json`, generado por `src/train.py`.
@@ -17,10 +17,10 @@ Fuente: `reports/metrics.json`, generado por `src/train.py`.
 
 Estos puntos salen de los coeficientes de la regresión logística (`reports/coefficients.csv`) y de los datos reales agregados por tipo de contrato. Son **asociaciones estadísticas, no relaciones de causalidad**.
 
-- El contrato mes a mes es la asociación individual más fuerte con el churn entre las variables categóricas (coeficiente +0.66), y se confirma en los datos reales: **42.7% de churn en contratos mes a mes, contra 11.3% en contratos de un año y 2.8% en contratos de dos años** (coeficiente del contrato de dos años: -0.78).
+- El contrato mes a mes es una de las asociaciones más fuertes con el churn entre las variables categóricas (coeficiente +0.66), y se confirma en los datos reales: **42.7% de churn en contratos mes a mes, contra 11.3% en contratos de un año y 2.8% en contratos de dos años** (coeficiente del contrato de dos años: -0.78).
 - Tener internet por fibra óptica es la variable individual con mayor asociación positiva (+0.71). Es un indicio, no una explicación: podría reflejar que estos clientes pagan más o tienen más alternativas en el mercado, no que la fibra en sí misma cause la baja.
-- La antigüedad (`tenure`) es la variable con mayor asociación negativa (-1.15): cuantos más meses lleva un cliente, menos probable es que se dé de baja.
-- No tener ningún servicio de internet contratado reduce fuertemente el riesgo asociado (suma de -1.95 entre las 7 columnas relacionadas a "sin internet"). Es probable que sean clientes con un plan más simple y menos puntos de fricción, no que "no tener internet" proteja contra el churn por sí solo.
+- La antigüedad (`tenure`) es la variable individual con mayor asociación negativa (-1.15): cuantos más meses lleva un cliente, menos probable es que se dé de baja.
+- No tener ningún servicio de internet contratado reduce fuertemente el riesgo asociado: el efecto combinado de las 7 columnas relacionadas a "sin internet" es -1.95. Una posible explicación es que sean clientes con un plan más simple y menos puntos de fricción, no que "no tener internet" proteja contra el churn por sí solo.
 
 ## Dataset
 
@@ -36,11 +36,11 @@ data/raw/Telco-Customer-Churn.csv
 
 ```mermaid
 flowchart LR
-    A["data/raw/\nTelco-Customer-Churn.csv"] -->|etl.py| B["data/processed/\ntelco_clean.csv"]
-    B -->|load.py| C[("data/warehouse/\ntelco.duckdb")]
-    C -->|train.py| D["models/churn_model.joblib\n+ reports/metrics.json"]
-    D -->|analyze.py| E["reports/coefficients.csv\ntest_predictions.csv\nthreshold_analysis.csv"]
-    E -->|app.py| F["Dashboard\nStreamlit"]
+    A["data/raw/<br/>Telco-Customer-Churn.csv"] -->|etl.py| B["data/processed/<br/>telco_clean.csv"]
+    B -->|load.py| C[("data/warehouse/<br/>telco.duckdb")]
+    C -->|train.py| D["models/churn_model.joblib<br/>+ reports/metrics.json"]
+    D -->|analyze.py| E["reports/coefficients.csv<br/>test_predictions.csv<br/>threshold_analysis.csv"]
+    E -->|app.py| F["Dashboard<br/>Streamlit"]
 ```
 
 - **`src/etl.py`** — limpia el CSV crudo: convierte `TotalCharges` a numérico, rellena los vacíos con 0, mapea `Churn` a 0/1, y guarda `data/processed/telco_clean.csv`.
@@ -62,7 +62,13 @@ Crear y activar un entorno virtual, e instalar dependencias:
 
 ```
 python -m venv .venv
-source .venv/Scripts/activate        # Windows PowerShell: .venv\Scripts\Activate.ps1
+
+# Activar el entorno
+# Windows PowerShell:
+.venv\Scripts\Activate.ps1
+# Mac/Linux:
+source .venv/bin/activate
+
 pip install -r requirements.txt
 ```
 
