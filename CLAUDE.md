@@ -29,7 +29,13 @@ Execute the EDA notebook end-to-end and check for errors:
 .venv/Scripts/python.exe -m nbconvert --to notebook --execute --inplace notebooks/eda.ipynb
 ```
 
-There is no test suite, linter, or build step configured yet.
+Run the test suite:
+
+```
+.venv/Scripts/python.exe -m pytest
+```
+
+There is no linter or build step configured yet.
 
 ## Pipeline architecture
 
