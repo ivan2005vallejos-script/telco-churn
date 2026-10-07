@@ -143,14 +143,18 @@ top_increase = coefficients.head(10)
 top_decrease = coefficients.tail(10).sort_values("coefficient")
 chart_data = pd.concat([top_increase, top_decrease]).sort_values("coefficient")
 
-# Fondo transparente y texto en el color del tema activo, para que se vea
-# bien tanto en modo claro como en modo oscuro.
-theme_base = st.get_option("theme.base") or "light"
-text_color = "#f5f5f5" if theme_base == "dark" else "#31333f"
+# st.get_option("theme.base") solo refleja un tema fijado a mano en
+# config.toml, no el tema real que ve cada usuario (oscuro/claro del
+# sistema), así que no es confiable para elegir el color del texto. En
+# cambio, le damos al gráfico un fondo propio fijo con buen contraste,
+# que se ve igual sin importar el tema de Streamlit.
+CHART_BACKGROUND = "#fcfcfb"
+CHART_TEXT_COLOR = "#0b0b0b"
 
 fig, ax = plt.subplots(figsize=(8, 7))
-fig.patch.set_alpha(0)
-ax.patch.set_alpha(0)
+fig.patch.set_facecolor(CHART_BACKGROUND)
+ax.set_facecolor(CHART_BACKGROUND)
+text_color = CHART_TEXT_COLOR
 
 colors = [COLOR_INCREASE if c > 0 else COLOR_DECREASE for c in chart_data["coefficient"]]
 ax.barh(chart_data["feature"], chart_data["coefficient"], color=colors)
