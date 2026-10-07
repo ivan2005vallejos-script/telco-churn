@@ -77,15 +77,16 @@ def build_pipeline() -> Pipeline:
     )
 
 
+def split_data(df: pd.DataFrame):
+    y = df[TARGET]
+    X = df.drop(columns=DROP_COLS + [TARGET])
+    return train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+
 def main() -> None:
     df = load_customers()
 
-    y = df[TARGET]
-    X = df.drop(columns=DROP_COLS + [TARGET])
-
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=42
-    )
+    X_train, X_test, y_train, y_test = split_data(df)
 
     pipeline = build_pipeline()
     pipeline.fit(X_train, y_train)
